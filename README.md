@@ -1,8 +1,6 @@
 # strangersThings
-<<<<<<< HEAD
 
 yooooooooooooooooooooooooooo
-=======
 //test
 
 1. Create each component
@@ -32,4 +30,4 @@ Right search/create posts/edit/delete
 Center will display posts
 Left side will be profile/messages/create messages
 
->>>>>>> c1104ca (test)
+final change
