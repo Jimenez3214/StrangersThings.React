@@ -79,6 +79,8 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```JavaScript
 
+
+
 ```
 
 
@@ -135,6 +137,66 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```JavaScript
 
+import React, { useState } from 'react';
+
+const Search = () => {
+    const [searchQuery, setSearchQuery] = userState('');
+    const [searchResults, setSearchResults] = userState([]);
+    const [isLoading, setIsLoading] = userState(false);
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+
+        // Set the isLoading state to true... derp
+        setIsLoading(true);
+
+        try {
+            // Simulate an API call
+            // Replace 'apiEndpoint' with out actual URL
+            const response = await fetch('apiEndpoint/search?q=${searchQueary}')
+            const data = await response.json();
+
+            setSearchResults(data);
+        } catch (error) {
+            console.log('Error during the search my dude :(', error);
+        }
+
+        setIsLoading(false);
+    };
+
+    return (
+        <div>
+            <h1>Search</h1>
+            <form onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search query"
+                    required
+                />
+                <button type="submit">Search</button>
+            </form>
+            {isLoading ? (
+                <p>Loading...</p>
+                ) : (
+                    <div>
+                        {searchResults.length > 0 ?(
+                            <ul>
+                                {searchResults.map((results) => (
+                                    <li key={result.id}>{result.title}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No results found</p>
+                        )}
+                    </div>
+                )}
+        </div>
+    );
+};
+
+export default Search;
 ```
 
 # 4. Profile
