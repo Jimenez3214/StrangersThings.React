@@ -27,7 +27,7 @@ Right search/create posts/edit/delete
 Center will display posts
 Left side will be profile/messages/create messages
 
-PROJECT GOALS BASED ON DATE:
+# PROJECT GOALS BASED ON DATE:
 
 MONDAY 6 - 5 - 2023
     Project was started.
@@ -164,6 +164,55 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```JavaScript
 
+import React, { useState, useEffect } from 'react';
+
+const Profile = ({ userId }) => {
+    const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                // API call to fetch user details
+                // Replace 'apiEndpoint' with our URL
+                const response = await fetch('apiEndpoint/users/${userId}');
+                const data = await response.json();
+
+                setUser(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.log('Error fetching user:', error);
+            }
+        };
+
+        fetchUser();
+    }, [userId]);
+
+    const handleEditProfile = () => {
+        console.log('Editing profile:', user);
+        // Add code for editing profile
+    };
+
+    return (
+        <div>
+            <h1>User Profile</h1>
+            {isLoading ? (
+                <p>Loading user profile...</p>
+            ): user ? (
+                <div>
+                    <p>Name: {user.name}</p>
+                    <p>Email: {user.email}</p>
+                    {/* Render Details */}
+                    <button onClick={handleEditProfile}>Edit Profile</button>
+                </div>
+            ) : (
+                <p>User not found</p>
+            )}
+        </div>
+    );
+};
+
+export default Profile;
 ```
 
 # 5. View
