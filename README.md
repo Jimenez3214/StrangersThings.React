@@ -54,7 +54,7 @@ COMPONENT PAGES AND FUNCTIONS FOR OUTLINE and Skeleton/PseudoCode
 ***************************************************************
 
 # 1. HOME PAGE
-    Component represents the langing page for application
+    Component represents the landing page for application
     It can display featured listings, categories, or any other info
     You can include a search bar or a link for searching
 
@@ -107,6 +107,63 @@ const Post = () => {
 psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```JavaScript
+
+import React, { useState, useEffect } from 'react';
+
+const Post = ({ postId }) => {
+    const [post, setPost] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // sim data fetch API
+        const fetchPost = async () => {
+            try {
+                // API Call
+                // Replace 'apiEndpoint' with out API
+                const response = await fetch('apiEndpoint/posts/${postId}');
+                const data = await response.json();
+
+                setPost(data);
+                setIsLoading(false);
+            } catach (error) {
+                console.log('Error fetching post:', error);
+            }
+        };
+
+        fetchPost();
+    }, [postId]);
+    
+    const handleEditPost = () => {
+        console.log('Editing post:', post);
+        //add code for editing post
+    };
+
+    const handleDeletePost = () => {
+        console.log('Deleting post:', post);
+        //add code for deleting
+    };
+
+    return (
+        <div>
+            <h1>Post Detail</h1>
+            {isLoading ? (
+                <p>Loading post...</p>
+            ) : post ? (
+                <div>
+                    <p>Title: {post.title}</p>
+                    <p>Description: {post.description}</p>
+                    {/* Render other details you know the drill */}
+                    <button onClick={handleEditPost}>Edit Post</button>
+                    <button onClick={handleDeletePost}>Delete Post</button>
+                </div>
+            ) : (
+                <p>Post not found</p>
+            )}
+        </div>
+    );
+};
+
+export default Post;
 
 ```
 
