@@ -1,8 +1,5 @@
 # strangersThings
 
-yooooooooooooooooooooooooooo
-//test
-
 1. Create each component
     
     home page
@@ -30,13 +27,33 @@ Right search/create posts/edit/delete
 Center will display posts
 Left side will be profile/messages/create messages
 
-final change
+PROJECT GOALS BASED ON DATE:
 
-****************************************************************
-            COMPONENT PAGES AND FUNCTIONS FOR OUTLINE and Skeleton/PseudoCode
-****************************************************************
+MONDAY 6 - 5 - 2023
+    Project was started.
+    Basic outline and project goals
 
-1. HOME PAGE
+TUESDAY 6 - 6 - 2023
+    Started pseudoCoding
+    Research for project
+    I also went fishing, but that's probably not relevant...
+
+WEDNESDAY 6 - 7 - 2023
+    Continuing pseudoCoding before class
+    Skeleton code in readMe is finished
+    Will run NPM Install and implement skeleton frame today in class
+    Will try to have PseudoCode done
+
+Thursday 6 - 7 - 2023
+    Goal is to have a working and running skeleton framework
+    With pseudocoding done, implementation should become reletively easy
+    I have work this day, and till Monday, so if these goals are met we'll both be ahead of the game to tweak any issues later on.
+
+***************************************************************
+COMPONENT PAGES AND FUNCTIONS FOR OUTLINE and Skeleton/PseudoCode
+***************************************************************
+
+# 1. HOME PAGE
     Component represents the langing page for application
     It can display featured listings, categories, or any other info
     You can include a search bar or a link for searching
@@ -65,7 +82,7 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 ```
 
 
-2. POST
+# 2. POST
     Component represents an individual listing
     Displays the details of specific post, title, descrpition, price, and contact info
     Includes functionality to edit and delete post if the user is the owner
@@ -92,7 +109,7 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 ```
 
 
-3. Search
+# 3. Search
     Component handles the search functionality
     displas the search results based on the users input or selected filters
     includes a search bar and filter options for refining the seach results
@@ -120,7 +137,7 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```
 
-4. Profile
+# 4. Profile
     Component represents the user's profile page
     Displays info about the user, such as username, profile pic, and contact details
     it includes abiltiy to edit the user profile info
@@ -149,7 +166,7 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```
 
-5. View
+# 5. View
     Component represents deailed view of user's item or listings
     Displays complete info about particular item, images, description, price, contact info.
     Includes a button to send messages to the poster
@@ -174,10 +191,60 @@ const View = () => {
 psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```JavaScript
+import React, { useState, useEffect } from 'react';
 
+const View = ({ itemId }) => {
+    const [item, setItem] = useState(null);
+    const [isloading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulating fetch from API
+        const fetchItem = async () => {
+            try {
+                // API call to fetch ID
+                // Replace the 'apiEndPoint' with our actual API url
+                const response = await fetch('apiEndpoint/items/${itemID}');
+                const data = await response.json();
+
+                setItem(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.log('Error fetching item:', error);
+            }
+        };
+
+        fetchItem();
+    }, [itemId]);
+
+    const handleEditItem = () => {
+        // Handle the edit item func
+        console.log('Editing Item:', item);
+        // ADD code to naviate to edit item page or perform edit
+    };
+
+    return (
+        <div>
+            <h1>Item Detail View</h1>
+            {isLoading ? (
+                <p>Loading Item...</p>
+            ) : (
+                <div>
+                    <p>Title: {item.title}</p>
+                    <p>Descriptiion: {item.description}</p>
+                    {/* Render other details of the item */}
+                    <button onClick={handleEditItem}>Edit Item</button>
+                </div>
+            ) :(
+                <p>Item not found</p>
+            )}
+        </div>
+    );
+};
+
+export default View;
 ```
 
-6. Login
+# 6. Login
     Component handles the login functionality
     Includes input fields for username/email and password
     Allows users to authenticate and login to their accounts
@@ -275,7 +342,7 @@ const Login = () => {
 export default Login;
 ```
 
-7. Logout
+# 7. Logout
     Component handles the logout functionality
     it logs out the currently authenticated user and redirects to the home page
 
@@ -335,7 +402,7 @@ return (
 export default Logout;
 ```
 
-8. Message Users
+# 8. Message Users
     This component provides a user interface for sending and receiving messages
     It displays a list of conversations and allows users to click on a concversation to view and reply to messages
 
