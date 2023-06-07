@@ -31,3 +31,167 @@ Center will display posts
 Left side will be profile/messages/create messages
 
 final change
+
+****************************************************************
+            COMPONENT PAGES AND FUNCTIONS FOR OUTLINE and Skeleton/PseudoCode
+****************************************************************
+
+1. HOME PAGE
+    Component represents the langing page for application
+    It can display featured listings, categories, or any other info
+    You can include a search bar or a link for searching
+
+```JavaScript
+
+import React from 'react';
+
+const HomePage = () => {
+    return (
+        <div>
+            <h1>Welcome to StrangersThings!</h1>
+            {/* Our code goes here! */}
+        </div>
+    );
+};
+
+```
+
+
+2. POST
+    Component represents an individual listing
+    Displays the details of specific post, title, descrpition, price, and contact info
+    Includes functionality to edit and delete post if the user is the owner
+    Allows users to send messages to the poster
+
+```JavaScript
+
+import React from 'react';
+
+const Post = () => {
+    return (
+        <div>Post Detail</div>
+        {/* Our code goes here! */}
+    );
+}:
+
+```
+
+
+3. Search
+    Component handles the search functionality
+    displas the search results based on the users input or selected filters
+    includes a search bar and filter options for refining the seach results
+
+```JavaScript
+
+import React from 'react';
+
+const Search = () => {
+    return (
+        <div>
+            <h1>Search Listings</h1>
+            {/* Our code goes here! */}
+        </div>
+    );
+};
+
+```
+
+4. Profile
+    Component represents the user's profile page
+    Displays info about the user, such as username, profile pic, and contact details
+    it includes abiltiy to edit the user profile info
+    lists users posted items and allows editing and deletion
+
+```JavaScript
+
+Import React from 'react';
+
+const Profile = () => {
+    return (
+        <div>
+            <h1>User Profile</h1>
+            {/* Our code goes here */}
+        </div>
+    );
+};
+
+```
+
+5. View
+    Component represents deailed view of user's item or listings
+    Displays complete info about particular item, images, description, price, contact info.
+    Includes a button to send messages to the poster
+
+```JavaScript
+
+import React from 'react';
+
+const View = () => {
+    return (
+        <div>
+            <h1>Item Detail View</h1>
+            {/* Our code... You know what, this is getting redundent... */}
+        </div>
+    );
+};
+
+```
+
+6. Login
+    Component handles the login functionality
+    Includes input fields for username/email and password
+    Allows users to authenticate and login to their accounts
+
+```JavaScript
+
+import React from 'react';
+
+const Login = () => {
+    return (
+        <div>
+            <h1>Login</h1>
+            {/* do your thing here... I think I'm going to do movie quotes next */}
+        </div>
+    );
+};
+
+```
+
+7. Logout
+    Component handles the logout functionality
+    it logs out the currently authenticated user and redirects to the home page
+
+```JavaScript
+
+import React from 'react';
+
+const Logout = () => {
+    return (
+        <div>
+            <h1>Logout</h1>
+            {/* I am Jack's complete lack of surprise */}
+        </div>
+    );
+};
+
+```
+
+8. Message Users
+    This component provides a user interface for sending and receiving messages
+    It displays a list of conversations and allows users to click on a concversation to view and reply to messages
+
+```JavaScript
+
+import React from 'react';
+
+const MessageUsers = () => {
+    return (
+        <div>
+            <h1>Messages</h1>
+            {/* Really? really? This is the last one? But I have so many movie quotes! */}
+        </div>
+    );
+};
+
+```
