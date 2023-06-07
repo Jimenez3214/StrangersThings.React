@@ -161,9 +161,7 @@ const Post = ({ postId }) => {
             )}
         </div>
     );
-};
-
-export default Post;
+}
 
 ```
 
@@ -668,3 +666,5 @@ return (
 export default MessageUsers;
 
 ```
+
+//test
