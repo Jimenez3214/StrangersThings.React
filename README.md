@@ -1,5 +1,4 @@
 # strangersThings
-//test finalasd
 
 1. Create each component
     
@@ -162,7 +161,9 @@ const Post = ({ postId }) => {
             )}
         </div>
     );
-}
+};
+
+export default Post;
 
 ```
 
@@ -668,4 +669,6 @@ export default MessageUsers;
 
 ```
 
-//test
+react
+reactdom
+reactscripts
