@@ -451,7 +451,7 @@ const Login = () => {
         try {
             // sim API call for user auth
             // Replace 'apiEndpoint' with actual endpoint URL
-            const response = await fetch ('apiEndpoint', {
+            const response = await fetch (`${BASE_URL}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
