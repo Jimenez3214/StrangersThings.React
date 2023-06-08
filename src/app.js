@@ -1,25 +1,15 @@
-// import React from "react";
-// // import  ReactDOM  from "react-dom";
-
-
-// export const App = () =>{
-// return(<h1>hello world</h1>)
-// }
-
-
-
-// // ReactDOM.render(
-// //     <App />,
-// //     document.getElementById('app'),
-// // )
-
-// export default App;
+import React from "react";
+import ReactDOM from 'react-dom';
 
 const App = () => {
-    return (
-        <h1>Hello World!</h1>
-    )
+  return (
+    <div><h1>hello world</h1></div>
+  );
+};
 
-}
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
 
 export default App;
