@@ -161,7 +161,9 @@ const Post = ({ postId }) => {
             )}
         </div>
     );
-}
+};
+
+export default Post;
 
 ```
 
@@ -667,4 +669,6 @@ export default MessageUsers;
 
 ```
 
-//test
+react
+reactdom
+reactscripts
