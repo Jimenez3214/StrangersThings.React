@@ -1,4 +1,4 @@
-/* import React from 'react';
+import React from 'react';
 
 const Logout = () => {
     return (
@@ -9,4 +9,4 @@ const Logout = () => {
     );
 };
 
-export default Logout; */
+export default Logout;
