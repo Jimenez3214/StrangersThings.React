@@ -12,7 +12,7 @@ const Login = () => {
        
 
         try {
-            const response = await fetch(`${BASE_URL}`, {
+            const response = await fetch(`${BASE_URL}/users/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
