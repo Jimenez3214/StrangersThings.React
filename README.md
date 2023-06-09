@@ -51,3 +51,15 @@ Thursday 6 - 8 - 2023
 
 Friday 6 - 9 - 2023
     Finished login component. Added fetchData function in ./api/index.js api is working, login component returns reponse is false. Need to check API documentation. 
+
+Monday 6 - 12 - 2023
+    GOAL: is to have post, search, login component finished and functional. API returns post detail etc.
+
+TUESDAY 6 - 13 - 2023
+    GOAL: is to finish remaining components then begin testing and working out issues. Add a simple CSS styling.
+
+WEDNESDAY 6 - 14 - 2023
+    GOAL fix any issues and make it look pretty and work on any extra credit/make sure we're good for the grading rubric. 
+
+THURSDAY 6 - 15 - 2023
+    GOAL make any last minute changes, push it, and deploy it to netlify! 
