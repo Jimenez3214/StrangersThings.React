@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import ReactDOM from 'react-dom';
 
 import Post from "./components/Post";
-/* import Search from "./components/Search";
-import Profile from "./components/Profile";
-import View from "./components/View";
-import Logout from "./components/Logout";
-import Message from "./components/Message";
- */
+// import Search from "./components/Search";
+// import Profile from "./components/Profile";
+// import View from "./components/View";
+import Login from "./components/login";
+// import Message from "./components/Message";
+ 
 const App = () => {
   return (
     <div className="app">
       <Post />
-{/*       <Search />
+       {/* <Search />
       <Profile />
-      <View />
-      <Logout/>
-      <Message /> */}
+      <View /> */}
+      <Login />
+      {/* <Message />  */}
     </div>
   );
 };
