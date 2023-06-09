@@ -23,6 +23,18 @@ const Post = ({ postId }) => {
     return (
         <div id='Post'>
             <h1>Post Details</h1>
+            {isLoading ? (
+                <p>Loading post...</p>
+            ) : post ? (
+                <div>
+                    <p>Title: {post.title}</p>
+                    <p>Description: {post.description}</p>
+                    <button>Edit Post</button>
+                    <button>Delete Post</button>
+                </div>
+            ) : (
+                <p>Post not found</p>
+            )}
         </div>
     );
 };
