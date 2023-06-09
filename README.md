@@ -50,7 +50,7 @@ Thursday 6 - 8 - 2023
     I have work this day, and till Monday, so if these goals are met we'll both be ahead of the game to tweak any issues later on.
 
 Friday 6 - 9 - 2023
-    Finished login component. Added fetchData function in ./api/index.js api is working, login component returns reponse is false. Need to check API documentation. 
+    Finished login component. Added fetchData function in ./api/index.js api is working, login component returns reponse is false. Need to check API documentation. Finished Post.js just need to do the AUTH JSON token string.. 
 
 Monday 6 - 12 - 2023
     GOAL: is to have post, search, login component finished and functional. API returns post detail etc.
