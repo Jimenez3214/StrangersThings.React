@@ -7,11 +7,13 @@ import Post from "./components/Post";
 // import View from "./components/View";
 import Login from "./components/login";
 // import Message from "./components/Message";
+import RegistrationPage from "./components/Register";
  
 const App = () => {
   return (
     <div className="app">
       <Post />
+      <RegistrationPage />
        {/* <Search />
       <Profile />
       <View /> */}
