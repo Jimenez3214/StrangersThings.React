@@ -62,4 +62,49 @@ WEDNESDAY 6 - 14 - 2023
     GOAL fix any issues and make it look pretty and work on any extra credit/make sure we're good for the grading rubric. 
 
 THURSDAY 6 - 15 - 2023
-    GOAL make any last minute changes, push it, and deploy it to netlify! 
+    GOAL make any last minute changes, push it, and deploy it to netlify!
+
+# PROJECT GUIDE
+
+1. Post View, Unaunthenticated
+    - Fetch and Display Posts on the homepage
+    - Make a GET request to `/api/posts` to fetch initial posts.
+    - Populate the posts into the JSX.
+
+2. Register/Login/Logout
+    - Create a registration form with username, password, and password confirmation fields.
+    - Send a correct AJAX request to the backend for user registration(`POST/api/users/register`).
+    - Handle the response and stor the token in state (and optinionally local storage).
+    - Store the token on successful login.
+    - Implement a logout function to clear the token from state (and localStorage).
+
+3. Post Form
+    - Create a form for users to make new listings
+    - **The form should match the fields expected by the API**
+    - Intercept the submit button to send the correct fetch request (`POST/api/posts`).
+    - Update the interface upon successful submission by adding the new post to the state.
+
+4. Post View, Upgrade with Authentication
+    - Enhance the posts view to show additional functionality for authentication users.
+    - When making a GET request tp `/api/posts`, include token in the headers top fetch the posts made by the active user along with their messages/
+    - Utilize the `isAuthor` field provided by the API to show/hide certain functionality based on whether the user is the author.
+
+5. Delete Button
+    - Add a delete button to each post
+    - Implement a click handler to send a delet request (`DELETE /api/posts/:postId`) for the corresponding post.
+    - Remove the post from the page and update the state upon successful deletion.
+
+6. Messages Form
+    - Add a form to send a message to the post author.
+    - Display the form only if a user is logged in and is not the author of the post.
+    - Implement the submit handler to send a message (`POST /api/posts/:postId/messages`) for the corresponding post.
+
+7. Loading the User Object on Page Load
+    - On page load, if a user is logged in (token is available), make a GET request to '/api/users/me`/
+    - Retrieve the user object containing their received messages and posts.
+    - Incorporate this as part of the page boottrapping process
+
+8. Search Form
+    - Implement a search form to filter listings.
+    - Listen to user input in the search field and update the searchTerm in the  state.
+    - Filter the listings based on the searchTerm and display the filtered results.
