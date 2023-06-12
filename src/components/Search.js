@@ -18,6 +18,10 @@ const Search = () => {
     return (
         <div id='Search'>
             <h1>Search</h1>
+            <form onSubmit={handleSearch}>
+                <input/>
+
+            </form>
         </div>
       
     );

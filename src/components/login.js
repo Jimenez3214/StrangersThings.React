@@ -14,7 +14,10 @@ const Login = () => {
         try {
             const response = await fetch(`${BASE_URL}/users/login`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${TOKEN_STRING_HERE}`
+                },
                 body: JSON.stringify({ username, password }),
             });
             const data = await response.json();
