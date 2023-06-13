@@ -30,6 +30,7 @@ const RegistrationPage = () => {
                 console.log('Registration successful');
             } else {
                 const data = await response.json();
+                console.log(data);
                 setError(data.error);
             }
         } catch (error) {
