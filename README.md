@@ -65,20 +65,6 @@ TUESDAY 6 - 13 - 2023
     LET'S GOOOOOOO!
 
     Created a MyListing component and deleted view component. Still have an issue with the token I need to fix.
-      ,-'"""`-.
-    ,'         `.
-   /        `    \
-  (    /          )
-  |             " |
-  (               )
- `.\\          \ /
-   `:.     , \ ,\ _
- hh  `:-.___,-`-.{\)
-       `.        |/ \
-         `.        \ \
-           `-.     _\,)
-              `.  |,-||
-                `.|| ||
 
     Almost there, just keep smiling.
 
