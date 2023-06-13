@@ -64,6 +64,24 @@ TUESDAY 6 - 13 - 2023
 
     LET'S GOOOOOOO!
 
+    Created a MyListing component and deleted view component. Still have an issue with the token I need to fix.
+      ,-'"""`-.
+    ,'         `.
+   /        `    \
+  (    /          )
+  |             " |
+  (               )
+ `.\\          \ /
+   `:.     , \ ,\ _
+ hh  `:-.___,-`-.{\)
+       `.        |/ \
+         `.        \ \
+           `-.     _\,)
+              `.  |,-||
+                `.|| ||
+
+    Almost there, just keep smiling.
+
 WEDNESDAY 6 - 14 - 2023
     GOAL: fix any issues and make it look pretty and work on any extra credit/make sure we're good for the grading rubric. 
 

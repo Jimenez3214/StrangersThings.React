@@ -10,6 +10,7 @@ import Login from "./components/login";
 // import Message from "./components/Message";
 import RegistrationPage from "./components/Register";
 import CreateListing from "./components/CreateListing";
+import MyListings from "./components/MyListings";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Search />
         <RegistrationPage />
         <CreateListing />
+        <MyListings />
         {/* 
         <Profile />
         <View /> */}
