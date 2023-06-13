@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../api';
 
 const Search = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -11,10 +12,10 @@ const Search = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch();
+            const response = await fetch(`${BASE_URL}/posts`);
             const data = await response.json();
-
-            setSearchResults(data);
+            console.log(response);
+            setSearchResults(data.post);
         } catch (error) {
             console.log('Error during the search', error);
         }
@@ -22,36 +23,37 @@ const Search = () => {
     };
 
     return (
-        <div id='Search'>
-            <h1>Search</h1>
-            <form onSubmit={handleSearch}>
-                <input
-                type='text'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target)}                
-                placeholder='search query'
-                required
-                />
-                <button type='submit'>Search</button>
-            </form>
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <div>
-                    {searchResults.length > 0 ?(
-                        <ul>
-                            {searchResults.map((results) => (
-                                  <li key={result.id}>{result.title}</li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No results found</p>
-                    )}    
-                </div>
-            )}
-        </div>
+        <div id="Search">
+          <h1>Search</h1>
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="search query"
+              
+            />
+            <button type="submit">Search</button>
+          </form>
       
-    );
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              {searchResults && searchResults.length > 0 ? (
+                <ul>
+                  {searchResults.map((result) => (
+                    <li key={result.id}>{result.title}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No results found</p>
+              )}
+            </div>
+          )}
+        </div>
+      );
 };
+
 
 export default Search;
