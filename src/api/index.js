@@ -4,7 +4,7 @@ export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAM
 
 export const KEY = "";
 
-export const TOKEN = 'ReplaceWithActualToken';
+export const setToken = '';
 
 /* const fetchData = async () => {
   try {

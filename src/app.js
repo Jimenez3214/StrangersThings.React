@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from 'react-dom';
+import { AuthProvider } from './AuthContext';
 
 import Post from "./components/Post";
 import Search from "./components/Search";
@@ -7,19 +8,24 @@ import Search from "./components/Search";
 // import View from "./components/View";
 import Login from "./components/login";
 // import Message from "./components/Message";
-// import RegistrationPage from "./components/Register";
- 
+import RegistrationPage from "./components/Register";
+import CreateListing from "./components/CreateListing";
+
 const App = () => {
   return (
-    <div className="app">
-      <Post />
-      <Search />
-      {/* 
-      <Profile />
-      <View /> */}
-      <Login />
-      {/* <Message />  */}
-    </div>
+    <AuthProvider>
+      <div className="app">
+        <Post />
+        <Search />
+        <RegistrationPage />
+        <CreateListing />
+        {/* 
+        <Profile />
+        <View /> */}
+        <Login />
+        {/* <Message />  */}
+      </div>
+    </AuthProvider>
   );
 };
 
