@@ -58,8 +58,14 @@ Monday 6 - 12 - 2023
 TUESDAY 6 - 13 - 2023
     GOAL: is to finish remaining components then begin testing and working out issues. Add a simple CSS styling.
 
+    REALITY: Search is working. Finished CreateListing and AuthContext. Both are functional. Profile, view, and message still need to be finished. There is two registeration functions. One is tied to the login component. I can not get it to work for the life of me. Edd, if you're reading this, fixing that would be awesome! 
+
+    I'll either have Profile, View, and Message done today or tomorrow before class. Work a full on Thursday, but I have Friday to to finish the project.
+
+    LET'S GOOOOOOO!
+
 WEDNESDAY 6 - 14 - 2023
-    GOAL fix any issues and make it look pretty and work on any extra credit/make sure we're good for the grading rubric. 
+    GOAL: fix any issues and make it look pretty and work on any extra credit/make sure we're good for the grading rubric. 
 
 THURSDAY 6 - 15 - 2023
     GOAL make any last minute changes, push it, and deploy it to netlify!
