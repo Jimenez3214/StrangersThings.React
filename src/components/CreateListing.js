@@ -35,7 +35,7 @@ const CreateListing = () => {
 
       if (response.ok) {
         // Post created successfully
-        console.log('Post created:', result.post);
+        console.log('Post created:', result, token);
         // Clear form inputs
         setTitle('');
         setDescription('');

@@ -17,13 +17,14 @@ const MyListings = () => {
         const userId = decodeToken.userId;        
         const response = await fetch(`${BASE_URL}/users/me`, {
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         });
         const data = await response.json();
         console.log('API Response:', data); // Log the API response for debugging
         if (response.ok) {
-          setListings(data?.posts ?? []); // Use optional chaining and nullish coalescing operator
+          setListings(data); // Use optional chaining and nullish coalescing operator
         } else {
           setError(data.error.message);
         }
