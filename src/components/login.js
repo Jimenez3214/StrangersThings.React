@@ -15,7 +15,7 @@ const Login = ({ token }) => {
 
   const registerUser = async (username, password) => {
     try {
-      const response = await fetch(`${BASE_URL}/users/register`, {
+      const response = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,6 +75,7 @@ const Login = ({ token }) => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
+      console.log('Token:', storedToken);
     }
   }, []);
 
@@ -94,7 +95,8 @@ const Login = ({ token }) => {
     console.log(!!localToken);
     return (
       <div>
-        <h1>Registration</h1>
+        {/* Registration is handled by a different route, need to remove code for this later! */}
+        {/* <h1>Registration</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -118,7 +120,7 @@ const Login = ({ token }) => {
           </label>
           <br />
           <button type="submit">Register</button>
-        </form>
+        </form> */}
         <h1>Login</h1>
         <form
   onSubmit={(e) => {

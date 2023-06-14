@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../api';
 import { AuthContext } from '../AuthContext';
+import jwtDecode from 'jwt-decode';
 
 const MyListings = () => {
   const { token } = useContext(AuthContext);
@@ -12,7 +13,9 @@ const MyListings = () => {
     console.log(token);
     const fetchListings = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/posts`, {
+        const decodeToken = jwtDecode(token);
+        const userId = decodeToken.userId;        
+        const response = await fetch(`${BASE_URL}/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -42,6 +45,7 @@ const MyListings = () => {
   console.log('Listings:', listings); // Log the listings array for debugging
 
   return (
+  
     <div>
       <h1>My Listings</h1>
       {listings.length > 0 ? (
