@@ -49,7 +49,8 @@ const MyListings = () => {
         },
       });
       const data = await response.json();
-      console.log('Delete Response:', data); // Log the delete API response for debugging
+      console.log('Delete Response:', data);
+  
       if (response.ok) {
         // Remove the deleted listing from the state
         setListings((prevListings) =>
@@ -102,4 +103,3 @@ const MyListings = () => {
 };
 
 export default MyListings;
-
