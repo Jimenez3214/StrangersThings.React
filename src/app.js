@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import { AuthProvider } from './AuthContext';
 
+
+
 import Post from "./components/Post";
 import Search from "./components/Search";
 // import Profile from "./components/Profile";

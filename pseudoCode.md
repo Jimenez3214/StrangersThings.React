@@ -28,6 +28,63 @@ psuedoCode (WARNING: THIS PROBABLY NEEDS TO BE EDITED AND WORKED ON FURTHER)
 
 ```JavaScript
 
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { AuthProvider } from "./AuthContext";
+
+import Post from "./components/Post";
+import Search from "./components/Search";
+import Login from "./components/Login";
+import RegistrationPage from "./components/Register";
+import CreateListing from "./components/CreateListing";
+import MyListings from "./components/MyListings";
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <div className="app">
+        <Router>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Search</Link>
+              </li>
+              <li>
+                <Link to="/post">Post</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+              <li>
+                <Link to="/create">Create Listing</Link>
+              </li>
+              <li>
+                <Link to="/listings">My Listings</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Switch>
+            <Route exact path="/" component={Search} />
+            <Route path="/post" component={Post} />
+            <Route path="/register" component={RegistrationPage} />
+            <Route path="/create" component={CreateListing} />
+            <Route path="/listings" component={MyListings} />
+            <Route path="/login" component={Login} />
+          </Switch>
+        </Router>
+      </div>
+    </AuthProvider>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("app"));
+
+export default App;
 
 
 ```
