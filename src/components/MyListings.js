@@ -14,7 +14,7 @@ const MyListings = () => {
     const fetchListings = async () => {
       try {
         const decodeToken = jwtDecode(token);
-        const userId = decodeToken.userId;        
+        const userId = decodeToken.userId;
         const response = await fetch(`${BASE_URL}/users/me`, {
           headers: {
             'Content-Type': 'application/json',
@@ -39,14 +39,48 @@ const MyListings = () => {
     fetchListings();
   }, [token]);
 
+  const handleDelete = async (POST_ID) => {
+    try {
+      const response = await fetch(`${BASE_URL}/posts/${POST_ID}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log('Delete Response:', data); // Log the delete API response for debugging
+      if (response.ok) {
+        // Remove the deleted listing from the state
+        setListings((prevListings) =>
+          prevListings.filter((listing) => listing._id !== POST_ID)
+        );
+      } else {
+        setError(data.error.message);
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting the listing:', error);
+      setError('An error occurred. Please try again later.');
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
 
+  const handleEdit = (POST_ID) => {
+    // Handle the editing of the listing based on the postId
+    console.log(`Editing listing with ID: ${POST_ID}`);
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+
   console.log('Listings:', listings); // Log the listings array for debugging
 
   return (
-  
     <div>
       <h1>My Listings</h1>
       {listings.length > 0 ? (
@@ -55,6 +89,8 @@ const MyListings = () => {
             <h2>{listing.title}</h2>
             <p>{listing.description}</p>
             {/* Render other listing details */}
+            <button onClick={() => handleDelete(listing._id)}>Delete</button>
+            <button onClick={() => handleEdit(listing._id)}>Edit</button>
           </div>
         ))
       ) : (
@@ -66,3 +102,4 @@ const MyListings = () => {
 };
 
 export default MyListings;
+
