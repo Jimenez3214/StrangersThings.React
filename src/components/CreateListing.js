@@ -5,6 +5,7 @@ import { AuthContext } from '../AuthContext';
 
 const CreateListing = () => {
   const { token } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -23,6 +24,7 @@ const CreateListing = () => {
         body: JSON.stringify({
           post: {
             title,
+            username,
             description,
             price,
             location: location || '[On Request]',
@@ -37,6 +39,7 @@ const CreateListing = () => {
         // Post created successfully
         console.log('Post created:', result, token);
         // Clear form inputs
+        setUsername('');
         setTitle('');
         setDescription('');
         setPrice('');

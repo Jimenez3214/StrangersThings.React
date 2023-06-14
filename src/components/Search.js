@@ -15,7 +15,15 @@ const Search = () => {
       const response = await fetch(`${BASE_URL}/posts`);
       const data = await response.json();
       console.log(data); 
-      setSearchResults(data.data.posts); 
+
+      const filteredResults = data.data.posts.filter((result) =>
+      result.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      result.author.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      result.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+      setSearchResults(filteredResults)
+
     } catch (error) {
       console.log('Error during the search', error);
     }
@@ -28,6 +36,7 @@ const Search = () => {
       <h1>Search</h1>
       <form onSubmit={handleSearch}>
         <input
+          id='keywords'
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -42,7 +51,13 @@ const Search = () => {
   <div>
     <ul>
       {searchResults.map((result) => (
-        <li key={result._id}>{result.title}</li>
+        <div key={result._id}>
+        <p>{result.author.username}</p>
+        <p>{result.title} </p>
+        <p> {result.description} </p>
+        <p> {result.price} </p>
+        <p> {result.willDeliver}</p>
+        </div>
       ))}
     </ul>
   </div>

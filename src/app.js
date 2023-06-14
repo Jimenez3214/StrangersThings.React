@@ -16,8 +16,8 @@ const App = () => {
   return (
     <AuthProvider>
       <div className="app">
-        <Post />
         <Search />
+        <Post />
         <RegistrationPage />
         <CreateListing />
         <MyListings />

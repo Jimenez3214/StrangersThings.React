@@ -24,7 +24,7 @@ const MyListings = () => {
         const data = await response.json();
         console.log('API Response:', data); // Log the API response for debugging
         if (response.ok) {
-          setListings(data); // Use optional chaining and nullish coalescing operator
+          setListings(data.data.posts ?? []); // Use optional chaining and nullish coalescing operator
         } else {
           setError(data.error.message);
         }
