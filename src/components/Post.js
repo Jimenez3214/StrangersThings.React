@@ -31,6 +31,7 @@ const PostList = () => {
                 <p>User: {post.author.username}</p>
                 <p>Description: {post.description}</p>
                 <p>Price: {post.price}</p>
+                <p>Location: {post.location}</p>
                 <p>Will Deliver: {post.willDeliver ? 'Yes' : 'No'}</p>
               </div>
             ))}
