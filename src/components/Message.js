@@ -11,7 +11,12 @@ const Message = () => {
         const response = await fetch(`${BASE_URL}/posts/POST_ID/messages`);
         const data = await response.json();
 
-        setMessages(data);
+        if (Array.isArray(data)) {
+          setMessages(data);
+        } else {
+          console.log('Received data is not an array:', data);
+        }
+
         setIsLoading(false);
       } catch (error) {
         console.log('Error occurred while fetching messages:', error);
@@ -65,3 +70,4 @@ const Message = () => {
 };
 
 export default Message;
+

@@ -33,6 +33,7 @@ const MyListings = () => {
         setError('An error occurred. Please try again later.');
       } finally {
         setLoading(false);
+        //setListings(false);
       }
     };
 
@@ -86,12 +87,13 @@ const MyListings = () => {
       <h1>My Listings</h1>
       {listings.length > 0 ? (
         listings.map((listing) => (
-          <div key={listing._id}>
+          <div key={listing._id}><div key={listing.active}>
             <h2>{listing.title}</h2>
             <p>{listing.description}</p>
             {/* Render other listing details */}
             <button onClick={() => handleDelete(listing._id)}>Delete</button>
             <button onClick={() => handleEdit(listing._id)}>Edit</button>
+          </div>
           </div>
         ))
       ) : (
