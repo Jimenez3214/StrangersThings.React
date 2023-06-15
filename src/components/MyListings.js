@@ -69,9 +69,25 @@ const MyListings = () => {
     return <p>Loading...</p>;
   }
 
-  const handleEdit = (POST_ID) => {
+  const handleEdit = async (POST_ID, title, body, token) => {
     // Handle the editing of the listing based on the postId
+    //POST_ID.preventDefault();
+    console.log('title, body: ', title, body);
     console.log(`Editing listing with ID: ${POST_ID}`);
+    console.log('handle edit token:', token);
+    const response = await fetch(`${BASE_URL}/posts/${POST_ID}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        body,
+
+      }),
+    });
+    const data = await response.json();
+    console.log('data:', data);
   };
 
   console.log('Listings:', listings); // Log the listings array for debugging
@@ -88,7 +104,7 @@ const MyListings = () => {
               <p>{listing.description}</p>
               {/* Render other listing details */}
               <button onClick={() => handleDelete(listing._id)}>Delete</button>
-              <button onClick={() => handleEdit(listing._id)}>Edit</button>
+              <button onClick={() => handleEdit(listing._id, listing.title, listing.body)}>Edit</button>
             </div>
           ))
       ) : (
