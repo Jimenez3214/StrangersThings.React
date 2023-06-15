@@ -7,9 +7,9 @@ const Message = ({ postId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const userIdRef = useRef(null);
   const messageRef = useRef(null);
-  const { token } = useContext(AuthContext); // Access the token from the AuthContext
+  const { token } = useContext(AuthContext);
 
-  console.log('postId:', postId); // Check the value of postId
+  console.log('postId:', postId);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -55,6 +55,12 @@ const Message = ({ postId }) => {
       console.log(data);
 
       // Handle the response data as needed
+      if (data.success) {
+        const newMessage = data.data.message;
+        setMessages([...messages, newMessage]);
+      } else {
+        console.log('Failed to send message:', data.error);
+      }
     } catch (error) {
       console.error('Error occurred while sending the message:', error);
     }
@@ -69,7 +75,6 @@ const Message = ({ postId }) => {
     handleSendMessage(userId, message);
   };
 
-
   return (
     <div>
       <h1>Messages</h1>
@@ -82,9 +87,9 @@ const Message = ({ postId }) => {
           ) : (
             <ul>
               {messages.map((message) => (
-                <li key={message.id}>
-                  <p>From: {message.sender}</p>
-                  <p>To: {message.recipient}</p>
+                <li key={message._id}>
+                  <p>From: {message.fromUser}</p>
+                  <p>To: {message.post}</p>
                   <p>{message.content}</p>
                 </li>
               ))}
@@ -103,4 +108,6 @@ const Message = ({ postId }) => {
 };
 
 export default Message;
+
+
 
