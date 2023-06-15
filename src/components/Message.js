@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { BASE_URL } from '../api';
+import { AuthContext } from '../AuthContext';
 
-const Message = () => {
+const Message = ({ postId }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const userIdRef = useRef(null);
+  const messageRef = useRef(null);
+  const { token } = useContext(AuthContext); // Access the token from the AuthContext
+
+  console.log('postId:', postId); // Check the value of postId
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/posts/POST_ID/messages`);
+        const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Use the token from the AuthContext
+          },
+        });
         const data = await response.json();
 
         if (Array.isArray(data)) {
@@ -24,11 +34,41 @@ const Message = () => {
     };
 
     fetchMessages();
-  }, []);
+  }, [postId, token]);
 
-  const handleSendMessage = (userId, message) => {
-    console.log(`Sending message to user ${userId}: ${message}`);
+  const handleSendMessage = async (userId, message) => {
+    try {
+      const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Use the token from the AuthContext
+        },
+        body: JSON.stringify({
+          message: {
+            content: message,
+          },
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      // Handle the response data as needed
+    } catch (error) {
+      console.error('Error occurred while sending the message:', error);
+    }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userId = userIdRef.current.value;
+    const message = messageRef.current.value;
+    console.log('userId:', userId);
+    console.log('message:', message);
+    handleSendMessage(userId, message);
+  };
+
 
   return (
     <div>
@@ -53,16 +93,9 @@ const Message = () => {
         </div>
       )}
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const userId = ''; 
-          const message = ''; 
-          handleSendMessage(userId, message);
-        }}
-      >
-        <input type="text" placeholder="Recipient ID" />
-        <input type="text" placeholder="Message" />
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Recipient ID" ref={userIdRef} />
+        <input type="text" placeholder="Message" ref={messageRef} />
         <button type="submit">Send Message</button>
       </form>
     </div>
