@@ -33,7 +33,6 @@ const MyListings = () => {
         setError('An error occurred. Please try again later.');
       } finally {
         setLoading(false);
-        //setListings(false);
       }
     };
 
@@ -51,7 +50,7 @@ const MyListings = () => {
       });
       const data = await response.json();
       console.log('Delete Response:', data);
-  
+
       if (response.ok) {
         // Remove the deleted listing from the state
         setListings((prevListings) =>
@@ -75,33 +74,29 @@ const MyListings = () => {
     console.log(`Editing listing with ID: ${POST_ID}`);
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-
   console.log('Listings:', listings); // Log the listings array for debugging
 
   return (
     <div>
       <h1>My Listings</h1>
       {listings.length > 0 ? (
-        listings.map((listing) => (
-          <div key={listing._id}><div key={listing.active}>
-            <h2>{listing.title}</h2>
-            <p>{listing.description}</p>
-            {/* Render other listing details */}
-            <button onClick={() => handleDelete(listing._id)}>Delete</button>
-            <button onClick={() => handleEdit(listing._id)}>Edit</button>
-          </div>
-          </div>
-        ))
+        listings
+          .filter((listing) => listing.active) // Filter out inactive listings
+          .map((listing) => (
+            <div key={listing._id}>
+              <h2>{listing.title}</h2>
+              <p>{listing.description}</p>
+              {/* Render other listing details */}
+              <button onClick={() => handleDelete(listing._id)}>Delete</button>
+              <button onClick={() => handleEdit(listing._id)}>Edit</button>
+            </div>
+          ))
       ) : (
-        <p>No listings found.</p>
+        <p>No active listings found.</p>
       )}
       {error && <p>{error}</p>}
     </div>
   );
 };
 
-export default MyListings;
+export default MyListings
