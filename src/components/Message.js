@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { BASE_URL } from '../api';
 import { AuthContext } from '../app';
 
@@ -6,14 +6,12 @@ const Message = ({ postId }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const userIdRef = useRef(null);
-  const messageRef = useRef(null);
+  const messageRef = useRef('');
   const { token } = useContext(AuthContext);
-
-//   console.log('postId:', postId);
-// console.log('message:' ,token)
 
   const postMessage = async () => {
     try {
+      console.log('Sending message...');
       const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
         method: "POST",
         headers: {
@@ -22,30 +20,26 @@ const Message = ({ postId }) => {
         },
         body: JSON.stringify({
           message:{
-            content: 'Messages'
+            content: messageRef.current.value
           }
         })
       });
       const data = await response.json();
-
+      console.log('Response:', data);
       if (Array.isArray(data)) {
         setMessages(data);
-        console,log(setMessages())
       } else {
         console.log('Received data is not an array:', data);
       }
 
       setIsLoading(false);
     } catch (error) {
-      console.error('error', error)
+      console.error('Error occurred while posting a message:', error)
     }
   };
     
-
-
   return (
     <div>
-      
       {isLoading ? (
         <p>Loading messages...</p>
       ) : (
@@ -69,13 +63,15 @@ const Message = ({ postId }) => {
       <form>
         <input type="text" placeholder="Recipient ID" ref={userIdRef} />
         <input type="text" placeholder="Message" ref={messageRef} />
-        <button onClick={()=>{postMessage}}>Post Message</button>
+        <button onClick={postMessage}>Post Message</button>
       </form>
     </div>
   );
 };
 
 export default Message;
+
+
 
 
 

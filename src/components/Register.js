@@ -9,23 +9,24 @@ const RegistrationPage = () => {
 
     const handleRegistration = async (e) => {
         e.preventDefault();
-
+      
         setIsLoading(true);
         setError(null);
-    
+      
         try {
-            const response = await fetch (
-                `${BASE_URL}/users/registration`, {
+            const response = await fetch(`${BASE_URL}/users/register`, {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json'
+                headers: {
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: '',
-                    password: ''
+                    user: {
+                    username: username,
+                    password: password,
+                    },
                 }),
             });
-
+      
             if (response.ok) {
                 console.log('Registration successful');
             } else {
@@ -35,10 +36,12 @@ const RegistrationPage = () => {
             }
         } catch (error) {
             console.log('Error during registration:', error);
-            setError('An error occurred during registration. Please try agin...');
+            setError('An error occurred during registration. Please try again...');
         }
+      
         setIsLoading(false);
     };
+      
 
     return (
         <div>
@@ -54,7 +57,7 @@ const RegistrationPage = () => {
                 </label>
                 <br />
                 <label>
-                Password:
+                    Password:
                     <input
                         type="password"
                         value={password}
@@ -67,7 +70,7 @@ const RegistrationPage = () => {
                     {isLoading ? 'Loading...' : 'Register'}
                 </button>                
             </form>
-            {error && <p>{error}</p>}
+            {error && <p>{String(error)}</p>}
         </div>
     );
 };
