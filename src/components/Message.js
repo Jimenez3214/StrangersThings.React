@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { BASE_URL } from '../api';
 import { AuthContext } from '../app';
 
-const Message = ({ postId }) => {
+const Message = ({ postId, authorId }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const userIdRef = useRef(null);
@@ -16,21 +16,23 @@ Basically, we have to completely rework this whole code. Overall, we're almost d
 I honestly don't think many people are, we can do it, but you know. This really belongs in the readme... Also, next time I do a project like this, there's 
 so many things I would do different to make this so much easier. But for first try, I think we did pretty good Edd. */
 
-  const postMessage = async () => {
-    try {
-      console.log('Sending message...');
-      const response = await fetch(`${BASE_URL}/posts/${userId}/messages`, {
-        method: "POST",
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          message: {
-            content: messageRef.current.value
-          }
-        })
-      });
+const postMessage = async () => {
+  try {
+    console.log('Sending message...');
+    const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message: {
+          content: messageRef.current.value,
+          fromUser: authorId, // Include the author's _id in the request payload
+        }
+      })
+    });
+      
       const data = await response.json();
       console.log('Response:', data);
       if (Array.isArray(data)) {

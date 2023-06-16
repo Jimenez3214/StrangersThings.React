@@ -38,7 +38,8 @@ const PostList = () => {
                 <p>Price: {post.price}</p>
                 <p>Location: {post.location}</p>
                 <p>Will Deliver: {post.willDeliver ? 'Yes' : 'No'}</p>
-                <Message postId={post.author.username}/>
+                {/* <Message postId={post.author.username}/> */}
+                <Message postId={post._id} authorId={post.author._id} />
               </div>
             ))}
           </div>
