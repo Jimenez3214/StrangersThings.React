@@ -25,7 +25,9 @@ const MyListings = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setListings(data.data.posts ?? []);
+        const activeListings = data.data.posts.filter((listing) => listing.active);
+        setListings(activeListings);
+        //setListings(data.data.posts ?? []);
       } else {
         setError(data.error.message);
       }
@@ -66,7 +68,7 @@ const MyListings = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ post: payload }), // Wrap payload in 'post' object
+        body: JSON.stringify({ post: payload }), 
       });
       const data = await response.json();
       if (response.ok) {

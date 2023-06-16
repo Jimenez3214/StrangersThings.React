@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Post from "./components/Post";
 import Search from "./components/Search";
-// import Profile from "./components/Profile";
-// import View from "./components/View";
 import Login from "./components/login";
 import Message from "./components/Message";
 import RegistrationPage from "./components/Register";
@@ -56,7 +54,7 @@ const App = () => {
     <AuthProvider>
       <BrowserRouter>
     <nav>
-    
+      
     </nav>
     </BrowserRouter>
 
@@ -67,6 +65,7 @@ const App = () => {
         <CreateListing />
         <MyListings />
         <Login />
+        <Message />
         
       </div>
     </AuthProvider>

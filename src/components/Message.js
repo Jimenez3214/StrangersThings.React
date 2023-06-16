@@ -9,17 +9,24 @@ const Message = ({ postId }) => {
   const messageRef = useRef('');
   const { token } = useContext(AuthContext);
 
+
+/* The issue isn't in the code structure, we need to call the userID not the username. So when you send a message
+it sends to the string associated with the user, NOT THE USERNAME. We need to rewrite the JSX to reflect this. Also, remove the post recipient in the JSX.
+Basically, we have to completely rework this whole code. Overall, we're almost done. I have some bootstrap in the search function. I'm not a fan of CSS
+I honestly don't think many people are, we can do it, but you know. This really belongs in the readme... Also, next time I do a project like this, there's 
+so many things I would do different to make this so much easier. But for first try, I think we did pretty good Edd. */
+
   const postMessage = async () => {
     try {
       console.log('Sending message...');
-      const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+      const response = await fetch(`${BASE_URL}/posts/${userId}/messages`, {
         method: "POST",
         headers: {
           'Content-type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          message:{
+          message: {
             content: messageRef.current.value
           }
         })
@@ -31,13 +38,14 @@ const Message = ({ postId }) => {
       } else {
         console.log('Received data is not an array:', data);
       }
-
+  
       setIsLoading(false);
     } catch (error) {
       console.error('Error occurred while posting a message:', error)
     }
   };
-    
+  
+
   return (
     <div>
       {isLoading ? (
@@ -50,7 +58,7 @@ const Message = ({ postId }) => {
             <ul>
               {messages.map((message) => (
                 <li key={message._id}>
-                  <p>From: {message.author.username}</p>
+                  <p>From: {message.fromUser}</p>
                   <p>To: {message.post}</p>
                   <p>{message.content}</p>
                 </li>
@@ -63,7 +71,9 @@ const Message = ({ postId }) => {
       <form>
         <input type="text" placeholder="Recipient ID" ref={userIdRef} />
         <input type="text" placeholder="Message" ref={messageRef} />
-        <button onClick={postMessage}>Post Message</button>
+        <button type="button" onClick={postMessage}>
+          Post Message
+        </button>
       </form>
     </div>
   );

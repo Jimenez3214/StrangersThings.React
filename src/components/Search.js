@@ -32,41 +32,56 @@ const Search = () => {
   
 
   return (
-    <div id="Search">
-      <h1>Search</h1>
-      <form onSubmit={handleSearch}>
-        <input
-          id='keywords'
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search query"
-        />
-        <button type="submit">Search</button>
+    <div id="Search" className="container">
+      <h1 className="mt-5">Search</h1>
+      <form className="mt-4 mb-4" onSubmit={handleSearch}>
+        <div className="input-group">
+          <input
+            id="keywords"
+            type="text"
+            className="form-control"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search query"
+          />
+          <button type="submit" className="btn btn-primary">
+            Search
+          </button>
+        </div>
       </form>
 
       {isLoading ? (
-  <p>Loading...</p>
-) : searchResults && searchResults.length > 0 ? (
-  <div>
-    <ul>
-      {searchResults.map((result) => (
-        <div key={result._id}>
-        <p>{result.author.username}</p>
-        <p>{result.title} </p>
-        <p> {result.description} </p>
-        <p> {result.price} </p>
-        <p> {result.willDeliver}</p>
+        <p>Loading...</p>
+      ) : searchResults && searchResults.length > 0 ? (
+        <div>
+          <ul className="list-group">
+            {searchResults.map((result) => (
+              <li key={result._id} className="list-group-item">
+                <p className="mb-0">
+                  <strong>Username:</strong> {result.author.username}
+                </p>
+                <p className="mb-0">
+                  <strong>Title:</strong> {result.title}
+                </p>
+                <p className="mb-0">
+                  <strong>Description:</strong> {result.description}
+                </p>
+                <p className="mb-0">
+                  <strong>Price:</strong> {result.price}
+                </p>
+                <p className="mb-0">
+                  <strong>Will Deliver:</strong> {result.willDeliver ? 'Yes' : 'No'}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
-      ))}
-    </ul>
-  </div>
-) : (
-  <p>No results found</p>
-)}
-
+      ) : (
+        <p>No results found</p>
+      )}
     </div>
   );
 };
 
 export default Search;
+
