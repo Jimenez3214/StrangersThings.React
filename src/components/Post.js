@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { BASE_URL } from '../api';
+import Message from './Message';
 
 const PostList = () => {
     const [posts, setPost] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedPostId, setSelectedPostId] = useState(null);
+   
+
     useEffect(() => {
         const fetchPosts = async() => {
             try {
@@ -18,6 +22,7 @@ const PostList = () => {
         };
         fetchPosts();
     }, []);
+
     return (
         <div id="PostList">
         <h1>Post List</h1>
@@ -33,12 +38,34 @@ const PostList = () => {
                 <p>Price: {post.price}</p>
                 <p>Location: {post.location}</p>
                 <p>Will Deliver: {post.willDeliver ? 'Yes' : 'No'}</p>
+                <Message postId={post._id}/>
               </div>
             ))}
           </div>
         ) : (
           <p>No posts found.</p>
         )}
+        {selectedPostId && (
+        <form onSubmit={handleSubmitMessage}>
+          <h2>Compose Message</h2>
+          <label>
+            Recipient:
+            <input
+              type="text"
+              value={recipient}
+              onChange={(e) => setRecipient(e.target.value)}
+            />
+          </label>
+          <label>
+            Message:
+            <textarea
+              value={messageContent}
+              onChange={(e) => setMessageContent(e.target.value)}
+            />
+          </label>
+          <button type="submit">Send</button>
+        </form>
+      )}
       </div>
     );
 };
