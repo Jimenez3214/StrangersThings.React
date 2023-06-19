@@ -48,19 +48,19 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      <Link className="navbar-brand" to="/">Home</Link>
+      <Link className="navbar-brand" to="/">StrangersThings</Link>
       {token ? (
         <>
           <Link className='nav-link' to="/Posts">New Listings</Link>
           <Link className='nav-link' to="/mylistings">My Listings</Link>
           <Link className='nav-link' to="/create">Create Listing</Link>          
-          <Link className='nav-link' to="/login">Login</Link>
-          <Link className='nav-link' to="/register">Register</Link>  
+          <Link className='nav-link' to="/login">Logout</Link>          
           <Link className='nav-link' to="/search">Search</Link>  
+          <Link className='nav-link' to="/Message">Message</Link>  
         </>
       ) : (
         <>
-                  
+          <Link className='nav-link' to="/register">Register</Link>          
           <Link className='nav-link' to="/login">Login</Link>
         </>
       )}
@@ -83,7 +83,7 @@ const App = () => {
           <Route path="/create" element={<CreateListing />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/Message" element={<Message />} />
           
         </Routes>
 
@@ -98,7 +98,11 @@ const App = () => {
 };
 
 const Home = () => {
-  return <h1>Home</h1>;
+  return (
+    <div className='text-center'>
+      <h1 className='display-4'>StrangersThings</h1>
+    </div>
+  );
 };
 
 const Logout = () => {

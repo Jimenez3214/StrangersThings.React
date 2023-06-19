@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 import EditListing from "./EditListing"; // Update the import statement for EditListing
 
 const MyListings = () => {
+  const [editListingId, setEditListingId] = useState(null);
   const { token } = useContext(AuthContext);
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(null);
@@ -98,6 +99,14 @@ const MyListings = () => {
     }
   };
 
+  const handleEditClick = (listingId) => {
+    setEditListingId(listingId);
+  };
+
+  const handleEditCancel = () => {
+    setEditListingId(null);
+  };
+
   const handleDelete = async (postId) => {
     try {
       await deleteListing(postId);
@@ -109,23 +118,38 @@ const MyListings = () => {
 
   return (
     <div>
-      <h1>My Listings</h1>
+      <h1 className="mb-4">My Listings</h1>
       {listings.length === 0 ? (
         <p>No listings found.</p>
       ) : (
-        <ul>
+        <ul className="list-group">
           {listings.map((listing) => (
-            <li key={listing._id}>
-              <p>Title: {listing.title}</p>
-              <p>Description: {listing.description}</p>
-              <p>Price: {listing.price}</p>
-              <p>Location: {listing.location}</p>
-              <button onClick={() => handleDelete(listing._id)}>Delete</button>
-              <EditListing
-                token={token}
-                postId={listing._id}
-                handleEdit={handleEdit}
-              />
+            <li key={listing._id} className="list-group-item">
+              <p className="mb-1">Title: {listing.title}</p>
+              <p className="mb-1">Description: {listing.description}</p>
+              <p className="mb-1">Price: {listing.price}</p>
+              <p className="mb-1">Location: {listing.location}</p>
+              <button
+                className="btn btn-danger me-2"
+                onClick={() => handleDelete(listing._id)}
+              >
+                Delete
+              </button>
+              {editListingId === listing._id ? (
+                <EditListing
+                  token={token}
+                  postId={listing._id}
+                  handleEdit={handleEdit}
+                  onCancel={handleEditCancel}
+                />
+              ) : (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => handleEditClick(listing._id)}
+                >
+                  Edit
+                </button>
+              )}
             </li>
           ))}
         </ul>

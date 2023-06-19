@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { BASE_URL } from "../api";
 import { AuthContext } from "../app";
 
@@ -29,7 +29,8 @@ const Message = ({ postId, authorId }) => {
       const data = await response.json();
       console.log("Response:", data);
       if (Array.isArray(data)) {
-        setMessages(data);
+        setMessages((prevMessages) => [...prevMessages, data.message]);
+        //setMessages(data);
       } else {
         console.log("Received data is not an array:", data);
       }
@@ -39,6 +40,37 @@ const Message = ({ postId, authorId }) => {
       console.error("Error occurred while posting a message:", error);
     }
   };
+
+  const fetchMessages = async () => {
+    try {
+      console.log("Fetching messages...");
+      const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      const data = await response.json();
+      console.log("Response:", data);
+      if (Array.isArray(data)) {
+        setMessages(data);
+      } else {
+        console.log("Received data is not an array:", data);
+      }
+  
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error occurred while fetching messages:", error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+  
+
 
   return (
     <div>

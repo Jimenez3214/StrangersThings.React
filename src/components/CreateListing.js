@@ -73,58 +73,73 @@ const CreateListing = () => {
 
   return (
     <div>
-      <h1>Create Listing</h1>
+      <h1 className="mb-4">Create Listing</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Title:
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Title:
+          </label>
           <input
             type="text"
+            id="title"
+            className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
           />
-        </label>
-        <br />
-        <label>
-          Description:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">
+            Description:
+          </label>
           <textarea
+            id="description"
+            className="form-control"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-        </label>
-        <br />
-        <label>
-          Price:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="price" className="form-label">
+            Price:
+          </label>
           <input
             type="text"
+            id="price"
+            className="form-control"
             value={price}
             onChange={handlePriceChange}
-          required
-            /* onChange={(e) => setPrice(e.target.value)}
-            required */
+            required
           />
-        </label>
-        <br />
-        <label>
-          Location:
+        </div>
+        <div className="mb-3">
+          <label htmlFor="location" className="form-label">
+            Location:
+          </label>
           <input
             type="text"
+            id="location"
+            className="form-control"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-        </label>
-        <br />
-        <label>
-          Will Deliver:
+        </div>
+        <div className="mb-3 form-check">
           <input
             type="checkbox"
+            id="willDeliver"
+            className="form-check-input"
             checked={willDeliver}
             onChange={(e) => setWillDeliver(e.target.checked)}
           />
-        </label>
-        <br />
-        <button type="submit">Create</button>
+          <label htmlFor="willDeliver" className="form-check-label">
+            Will Deliver
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Create
+        </button>
       </form>
       {error && <p>{error}</p>}
     </div>
