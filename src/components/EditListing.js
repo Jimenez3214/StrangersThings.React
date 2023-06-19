@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const EditListing = ({ token, postId, handleEdit }) => {
   const [editedData, setEditedData] = useState({
-    description: '',
-    price: '',
-    location: '',
+    description: "",
+    price: "",
+    location: "",
   });
 
   const handleSave = async () => {
@@ -16,9 +16,9 @@ const EditListing = ({ token, postId, handleEdit }) => {
 
     await handleEdit(postId, payload);
     setEditedData({
-      description: '',
-      price: '',
-      location: '',
+      description: "",
+      price: "",
+      location: "",
     });
   };
 
@@ -36,7 +36,7 @@ const EditListing = ({ token, postId, handleEdit }) => {
         <input
           type="text"
           value={editedData.description}
-          onChange={(e) => handleInputChange('description', e.target.value)}
+          onChange={(e) => handleInputChange("description", e.target.value)}
         />
       </p>
       <p>
@@ -44,7 +44,7 @@ const EditListing = ({ token, postId, handleEdit }) => {
         <input
           type="text"
           value={editedData.price}
-          onChange={(e) => handleInputChange('price', e.target.value)}
+          onChange={(e) => handleInputChange("price", e.target.value)}
         />
       </p>
       <p>
@@ -52,7 +52,7 @@ const EditListing = ({ token, postId, handleEdit }) => {
         <input
           type="text"
           value={editedData.location}
-          onChange={(e) => handleInputChange('location', e.target.value)}
+          onChange={(e) => handleInputChange("location", e.target.value)}
         />
       </p>
       <button onClick={handleSave}>Save</button>
@@ -61,4 +61,3 @@ const EditListing = ({ token, postId, handleEdit }) => {
 };
 
 export default EditListing;
-

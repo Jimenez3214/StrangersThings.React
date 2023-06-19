@@ -1,43 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { BASE_URL } from '../api';
-import { AuthContext } from '../app';
+import React, { useState, useEffect } from "react";
+import { BASE_URL } from "../api";
 
-
-
-
-const Login = ({ token }) => {
+const Login = () => {
   const [localToken, setLocalToken] = useState(null);
   const [error, setError] = useState(null);
+  const [username, setUsername] = useState("");
+  const [userData, setUserData] = useState(null);
 
   const setToken = (newToken) => {
     setLocalToken(newToken);
-    localStorage.setItem('token', newToken);
-  };
-
-  const registerUser = async (username, password) => {
-    try {
-      const response = await fetch(`${BASE_URL}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: {
-            username,
-            password
-          },
-        }),
-      });
-      const result = await response.json();
-      if (response.ok) {
-        setToken(result.data.token);
-      } else {
-        setError(result.error.message);
-      }
-    } catch (error) {
-      console.error(error);
-      setError("An error occurred during registration. Please try again.");
-    }
+    localStorage.setItem("token", newToken);
   };
 
   const loginUser = async (username, password) => {
@@ -57,6 +29,7 @@ const Login = ({ token }) => {
       const result = await response.json();
       if (response.ok) {
         setToken(result.data.token);
+        fetchUserData(result.data.token);
       } else {
         setError(result.error.message);
       }
@@ -66,94 +39,79 @@ const Login = ({ token }) => {
     }
   };
 
+  const fetchUserData = async (token) => {
+    try {
+      const response = await fetch(`${BASE_URL}/users/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setUserData(result.data);
+      } else {
+        setError(result.error.message);
+      }
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred while fetching user data.");
+    }
+  };
+
   const logoutUser = () => {
     setToken(null);
     setError(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
+    setUserData(null);
   };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
-      console.log('Token:', storedToken);
+      fetchUserData(storedToken);
     }
   }, []);
 
-  const makeHeaders = () => {
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    if (token) {
-      headers["Authorization"] = `Bearer ${token}`;
-    }
-    return headers;
+  const isLoggedIn = () => {
+    return !!localToken;
   };
-    
-    const isLoggedIn = () => {
-      return !!localToken;
-    };
-    console.log(!!localToken);
-    return (
-      <div>
-        {/* Registration is handled by a different route, need to remove code for this later! */}
-        {/* <h1>Registration</h1>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            const { username, password } = e.target.elements;
-            registerUser(username.value, password.value);
-          }}
-        >
-          <label>
-            Username:
-            <input type="text" name="username" required />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" name="password" required />
-          </label>
-          <br />
-          <label>
-            Confirm Password:
-            <input type="password" name="confirmPassword" required />
-          </label>
-          <br />
-          <button type="submit">Register</button>
-        </form> */}
-        <h1>Login</h1>
-        <form
-  onSubmit={(e) => {
-    e.preventDefault();
-    const { username, password } = e.target.elements;
-    loginUser(username.value, password.value);
-  }}
->
-  <label>
-    Username:
-    <input type="text" name="username" required />
-  </label>
-  <br />
-  <label>
-    Password:
-    <input type="password" name="password" required />
-  </label>
-  <br />
-  <button type="submit">Login</button>
-</form>
-        <button onClick={logoutUser}>Logout</button>
-        {error && <p>{error}</p>}
-        <p>{isLoggedIn() ? "User is logged in" : "User is logged out"}</p>
-      </div>
-    );
-  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const { username, password } = e.target.elements;
+          setUsername(username.value);
+          loginUser(username.value, password.value);
+        }}
+      >
+        <label>
+          Username:
+          <input type="text" name="username" required />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" name="password" required />
+        </label>
+        <br />
+        <button type="submit">Login</button>
+      </form>
+      <button onClick={logoutUser}>Logout</button>
+      {error && <p>{error}</p>}
+      {isLoggedIn() && userData && (
+        <div>
+          <p>Welcome, {userData.username}!</p>
+          {/* Display other user data here */}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Login;
-
-
-
-  
-
 
 

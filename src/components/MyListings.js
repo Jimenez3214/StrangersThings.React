@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BASE_URL } from '../api';
-import { AuthContext } from '../app';
-import jwtDecode from 'jwt-decode';
-import EditListing from './EditListing'; // Update the import statement for EditListing
+import React, { useContext, useEffect, useState } from "react";
+import { BASE_URL } from "../api";
+import { AuthContext } from "../app";
+import jwtDecode from "jwt-decode";
+import EditListing from "./EditListing"; // Update the import statement for EditListing
 
 const MyListings = () => {
   const { token } = useContext(AuthContext);
@@ -19,30 +19,32 @@ const MyListings = () => {
       const userId = decodeToken.userId;
       const response = await fetch(`${BASE_URL}/users/me`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
       if (response.ok) {
-        const activeListings = data.data.posts.filter((listing) => listing.active);
+        const activeListings = data.data.posts.filter(
+          (listing) => listing.active
+        );
         setListings(activeListings);
         //setListings(data.data.posts ?? []);
       } else {
         setError(data.error.message);
       }
     } catch (error) {
-      console.error('An error occurred while fetching the listings:', error);
-      setError('An error occurred. Please try again later.');
+      console.error("An error occurred while fetching the listings:", error);
+      setError("An error occurred. Please try again later.");
     }
   };
 
   const deleteListing = async (postId) => {
     try {
       const response = await fetch(`${BASE_URL}/posts/${postId}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -55,20 +57,20 @@ const MyListings = () => {
         setError(data.error.message);
       }
     } catch (error) {
-      console.error('An error occurred while deleting the listing:', error);
-      setError('An error occurred. Please try again later.');
+      console.error("An error occurred while deleting the listing:", error);
+      setError("An error occurred. Please try again later.");
     }
   };
 
   const editListing = async (postId, payload) => {
     try {
       const response = await fetch(`${BASE_URL}/posts/${postId}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ post: payload }), 
+        body: JSON.stringify({ post: payload }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -82,8 +84,8 @@ const MyListings = () => {
         setError(data.error.message);
       }
     } catch (error) {
-      console.error('An error occurred while editing the listing:', error);
-      setError('An error occurred. Please try again later.');
+      console.error("An error occurred while editing the listing:", error);
+      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -91,8 +93,8 @@ const MyListings = () => {
     try {
       await editListing(postId, payload);
     } catch (error) {
-      console.error('An error occurred while handling the edit:', error);
-      setError('An error occurred. Please try again later.');
+      console.error("An error occurred while handling the edit:", error);
+      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -100,8 +102,8 @@ const MyListings = () => {
     try {
       await deleteListing(postId);
     } catch (error) {
-      console.error('An error occurred while handling the delete:', error);
-      setError('An error occurred. Please try again later.');
+      console.error("An error occurred while handling the delete:", error);
+      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -134,8 +136,3 @@ const MyListings = () => {
 };
 
 export default MyListings;
-
-
-
-
-  

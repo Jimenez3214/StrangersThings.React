@@ -1,35 +1,36 @@
-import React, { useState } from 'react';
-import { BASE_URL } from '../api';
+import React, { useState } from "react";
+import { BASE_URL } from "../api";
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
-  
+
     setIsLoading(true);
-  
+
     try {
       const response = await fetch(`${BASE_URL}/posts`);
       const data = await response.json();
-      console.log(data); 
+      console.log(data);
 
-      const filteredResults = data.data.posts.filter((result) =>
-      result.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      result.author.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      result.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+      const filteredResults = data.data.posts.filter(
+        (result) =>
+          result.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          result.author.username
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          result.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
-      setSearchResults(filteredResults)
-
+      setSearchResults(filteredResults);
     } catch (error) {
-      console.log('Error during the search', error);
+      console.log("Error during the search", error);
     }
     setIsLoading(false);
   };
-  
 
   return (
     <div id="Search" className="container">
@@ -70,7 +71,8 @@ const Search = () => {
                   <strong>Price:</strong> {result.price}
                 </p>
                 <p className="mb-0">
-                  <strong>Will Deliver:</strong> {result.willDeliver ? 'Yes' : 'No'}
+                  <strong>Will Deliver:</strong>{" "}
+                  {result.willDeliver ? "Yes" : "No"}
                 </p>
               </li>
             ))}
@@ -84,4 +86,3 @@ const Search = () => {
 };
 
 export default Search;
-
