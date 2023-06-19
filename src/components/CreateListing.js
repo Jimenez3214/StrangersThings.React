@@ -73,7 +73,7 @@ const CreateListing = () => {
 
   return (
     <div>
-      <h1 className="mb-4">Create Listing</h1>
+      <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>Create Listing</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">

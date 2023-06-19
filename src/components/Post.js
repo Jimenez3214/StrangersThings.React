@@ -24,7 +24,7 @@ const PostList = () => {
 
   return (
     <div id="PostList">
-      <h1 className="mb-4">Post List</h1>
+      <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>New Listings</h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : posts && posts.length > 0 ? (

@@ -80,7 +80,7 @@ const Login = () => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>Login</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();

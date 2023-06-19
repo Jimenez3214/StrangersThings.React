@@ -117,8 +117,8 @@ const MyListings = () => {
   };
 
   return (
-    <div>
-      <h1 className="mb-4">My Listings</h1>
+    <div className=".bg-dark">
+      <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>My Listings</h1>
       {listings.length === 0 ? (
         <p>No listings found.</p>
       ) : (
