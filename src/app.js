@@ -86,8 +86,6 @@ const App = () => {
 
         <div className="app">
           <Search />
-          <Post />
-          <Message />
         </div>
    
       </BrowserRouter>

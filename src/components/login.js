@@ -30,6 +30,7 @@ const Login = () => {
       if (response.ok) {
         setToken(result.data.token);
         fetchUserData(result.data.token);
+        window.location.reload();
       } else {
         setError(result.error.message);
       }
@@ -105,7 +106,6 @@ const Login = () => {
       {isLoggedIn() && userData && (
         <div>
           <p>Welcome, {userData.username}!</p>
-          {/* Display other user data here */}
         </div>
       )}
     </div>
