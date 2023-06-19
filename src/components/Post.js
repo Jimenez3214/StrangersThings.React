@@ -48,7 +48,7 @@ const PostList = () => {
       ) : (
         <p>No posts found.</p>
       )}
-      {selectedPostId && (
+    {/*   {selectedPostId && (
         <form onSubmit={handleSubmitMessage} className="mt-4">
           <h2 className="mb-3">Compose Message</h2>
           <div className="form-group">
@@ -72,7 +72,7 @@ const PostList = () => {
           </div>
           <button type="submit" className="btn btn-primary">Send</button>
         </form>
-      )}
+      )} */}
     </div>
   );
 };

@@ -17,10 +17,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [postId, setPostId] = useState(null);
+  const [username, setUsername] = useState("");
 
-  const login = (newToken) => {
+  const login = (newToken, newUsername) => {
     setToken(newToken);
     localStorage.setItem('token', newToken);
+    setUsername(newUsername);
     setAuthPostId(newToken); // Set the postId as the same value as the newToken
   };
 
@@ -28,6 +30,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem('token');
     setPostId(null); // Clear the postId when logging out
+    setUsername("");
   };
 
   const setAuthPostId = (newPostId) => {
@@ -37,11 +40,14 @@ export const AuthProvider = ({ children }) => {
   console.log('AuthToken:', token);
 
   return (
-    <AuthContext.Provider value={{ token, login, logout, postId, setAuthPostId }}>
+    <AuthContext.Provider
+      value={{ token, login, logout, postId, setAuthPostId, username }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 const Navbar = () => {
   const { token } = useContext(AuthContext);
@@ -69,6 +75,11 @@ const Navbar = () => {
 };
 
 const App = () => {
+  const [username, setUsername] = useState("");
+
+  const handleLogin = (username) => {
+    setUsername(username);
+  };
 
   return (
     <AuthProvider>

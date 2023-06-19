@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../api";
+import React, { useState, useEffect, useContext } from 'react';
+import { BASE_URL } from '../api';
+import { AuthContext } from '../app';
 
 const Login = () => {
   const [localToken, setLocalToken] = useState(null);
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
+
+  const { login } = useContext(AuthContext);
 
   const setToken = (newToken) => {
     setLocalToken(newToken);
-    localStorage.setItem("token", newToken);
+    localStorage.setItem('token', newToken);
   };
 
   const loginUser = async (username, password) => {
     try {
       const response = await fetch(`${BASE_URL}/users/login`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           user: {
@@ -28,15 +31,15 @@ const Login = () => {
       });
       const result = await response.json();
       if (response.ok) {
-        setToken(result.data.token);
+        login(result.data.token); // Update the navbar by calling the login function from the AuthContext
         fetchUserData(result.data.token);
-        window.location.reload();
+        setUsername(username);
       } else {
         setError(result.error.message);
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred during login. Please try again.");
+      setError('An error occurred during login. Please try again.');
     }
   };
 
@@ -55,19 +58,19 @@ const Login = () => {
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred while fetching user data.");
+      setError('An error occurred while fetching user data.');
     }
   };
 
   const logoutUser = () => {
     setToken(null);
     setError(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setUserData(null);
   };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+    const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
       fetchUserData(storedToken);
@@ -80,7 +83,9 @@ const Login = () => {
 
   return (
     <div>
-      <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>Login</h1>
+      <h1 className="display-4 font-weight-bold text-danger" style={{ fontFamily: 'Benguiat Bold' }}>
+        Login
+      </h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
