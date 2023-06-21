@@ -118,3 +118,8 @@ THURSDAY 6 - 15 - 2023
     - Implement a search form to filter listings.
     - Listen to user input in the search field and update the searchTerm in the  state.
     - Filter the listings based on the searchTerm and display the filtered results.
+
+    # PROJECT WRAP UP
+
+WEDNESDAY 06-21-23
+    Project is complete and meets all the necessary requirements. Somethings I'm working on last minute are UI, the ability to have the users recieved messages be catagorized under the item the message was sent to, and cleaning the code up a bit. There's always more you can do, to make it better. 

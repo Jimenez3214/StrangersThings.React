@@ -53,7 +53,6 @@ const Message = ({ postId, authorId }) => {
       const response = await fetch(`${BASE_URL}/posts/${postId}/messages`);
       const data = await response.json();
       if (Array.isArray(data)) {
-        // Fetch user information for each message
         const messagesWithUsernames = await Promise.all(
           data.map(async (message) => {
             const userResponse = await fetch(
