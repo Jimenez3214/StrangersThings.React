@@ -64,7 +64,8 @@ const Navbar = () => {
           <Link className='nav-link' to="/create">Create Listing</Link>          
           <Link className='nav-link' to="/login">Logout</Link>          
           <Link className='nav-link' to="/search">Search</Link>  
-          <Link className='nav-link' to="/Message">Message</Link>  
+          <Link className='nav-link' to="/Profile">profile</Link> 
+
         </>
       ) : (
         <>
