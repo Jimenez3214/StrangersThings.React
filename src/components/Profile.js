@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { BASE_URL } from "../api";
 import { AuthContext } from "../app";
 
+
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const { token } = useContext(AuthContext);
-
+  console.log('Profile Token:', token);
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -18,7 +20,7 @@ const UserProfile = () => {
         const data = await response.json();
         console.log("Response:", response);
         console.log("Data:", data);
-        setUserData(data.user); 
+        setUserData(data); 
       } catch (error) {
         console.error("Error occurred while fetching user data:", error);
       }
