@@ -1,6 +1,6 @@
-import React, { createContext, useState, useContext } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
+import React, { createContext, useState, useContext } from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import Post from "./components/Post";
 import Search from "./components/Search";
 import Login from "./components/login";
@@ -9,27 +9,27 @@ import RegistrationPage from "./components/Register";
 import CreateListing from "./components/CreateListing";
 import MyListings from "./components/MyListings";
 
-export const COHORT_NAME = '2303-ftb-et-web-pt';
+export const COHORT_NAME = "2303-ftb-et-web-pt";
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [postId, setPostId] = useState(null);
   const [username, setUsername] = useState("");
 
   const login = (newToken, newUsername) => {
     setToken(newToken);
-    localStorage.setItem('token', newToken);
+    localStorage.setItem("token", newToken);
     setUsername(newUsername);
     setAuthPostId(newToken); // Set the postId as the same value as the newToken
   };
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem('token');
-    setPostId(null); // Clear the postId when logging out
+    localStorage.removeItem("token");
+    setPostId(null); 
     setUsername("");
   };
 
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     setPostId(newPostId);
   };
 
-  console.log('AuthToken:', token);
+  // console.log('AuthToken:', token);
 
   return (
     <AuthContext.Provider
@@ -48,26 +48,43 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-
 const Navbar = () => {
   const { token } = useContext(AuthContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      <Link className="navbar-brand" to="/">StrangersThings</Link>
+      <Link className="navbar-brand" to="/">
+        StrangersThings
+      </Link>
       {token ? (
         <>
-          <Link className='nav-link' to="/Posts">New Listings</Link>
-          <Link className='nav-link' to="/mylistings">My Listings</Link>
-          <Link className='nav-link' to="/create">Create Listing</Link>          
-          <Link className='nav-link' to="/login">Logout</Link>          
-          <Link className='nav-link' to="/search">Search</Link>  
-          <Link className='nav-link' to="/Message">Message</Link>  
+          <Link className="nav-link" to="/Posts">
+            New Listings
+          </Link>
+          <Link className="nav-link" to="/mylistings">
+            My Listings
+          </Link>
+          <Link className="nav-link" to="/create">
+            Create Listing
+          </Link>
+          <Link className="nav-link" to="/login">
+            Logout
+          </Link>
+          <Link className="nav-link" to="/search">
+            Search
+          </Link>
+          <Link className="nav-link" to="/Message">
+            Message
+          </Link>
         </>
       ) : (
         <>
-          <Link className='nav-link' to="/register">Register</Link>          
-          <Link className='nav-link' to="/login">Login</Link>
+          <Link className="nav-link" to="/register">
+            Register
+          </Link>
+          <Link className="nav-link" to="/login">
+            Login
+          </Link>
         </>
       )}
     </nav>
@@ -88,21 +105,16 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Posts" element={<Post />} /> 
+          <Route path="/Posts" element={<Post />} />
           <Route path="/mylistings" element={<MyListings />} />
           <Route path="/search" element={<Search />} />
           <Route path="/create" element={<CreateListing />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Message" element={<Message />} />
-          
         </Routes>
 
-        <div className="app">
-      
-          
-        </div>
-   
+        <div className="app"></div>
       </BrowserRouter>
     </AuthProvider>
   );
@@ -110,18 +122,21 @@ const App = () => {
 
 const Home = () => {
   const divStyle = {
-    backgroundColor: 'black',
-    minHeight: '100vh',
+    backgroundColor: "black",
+    minHeight: "100vh",
   };
 
   const textStyle = {
-    backgroundColor: 'black',
+    backgroundColor: "black",
   };
 
   return (
     <div style={divStyle}>
-      <div className='text-center' style={textStyle}>
-        <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>
+      <div className="text-center" style={textStyle}>
+        <h1
+          className="display-4 font-weight-bold text-danger"
+          style={{ fontFamily: "Benguiat Bold" }}
+        >
           S T R A N G E R S T H I N G S
         </h1>
 
@@ -158,15 +173,10 @@ const Home = () => {
   );
 };
 
-
-
-const Logout = () => {
+/* const Logout = () => {
   return <h1>Logout</h1>;
-};
+}; */
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+ReactDOM.render(<App />, document.getElementById("app"));
 
 export default App;

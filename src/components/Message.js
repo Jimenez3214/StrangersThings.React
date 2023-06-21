@@ -6,7 +6,7 @@ const Message = ({ postId, authorId }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const messageRef = useRef("");
-  const { token, username } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const postMessage = async () => {
     try {
@@ -29,10 +29,14 @@ const Message = ({ postId, authorId }) => {
       if (data && data.success) {
         // Message posted successfully
         const newMessage = data.data.message; // Get the newly posted message
-        setMessages((prevMessages) => [...prevMessages, newMessage]); // Add the new message to the state
+        console.log("New Message:", newMessage);
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
         messageRef.current.value = ""; // Clear the message input field
       } else {
-        console.log("Error occurred while posting a message:", data && data.error);
+        console.log(
+          "Error occurred while posting a message:",
+          data && data.error
+        );
       }
       setIsLoading(false);
     } catch (error) {
@@ -48,7 +52,9 @@ const Message = ({ postId, authorId }) => {
         // Fetch user information for each message
         const messagesWithUsernames = await Promise.all(
           data.map(async (message) => {
-            const userResponse = await fetch(`${BASE_URL}/users/${message.fromUser}`);
+            const userResponse = await fetch(
+              `${BASE_URL}/users/${message.fromUser}`
+            );
             const userData = await userResponse.json();
             const username = userData.username;
             return { ...message, fromUser: username };
@@ -65,7 +71,7 @@ const Message = ({ postId, authorId }) => {
   };
 
   useEffect(() => {
-    fetchMessages(); // Fetch messages when the component mounts
+    fetchMessages();
   }, []);
 
   return (
@@ -80,7 +86,7 @@ const Message = ({ postId, authorId }) => {
             <ul>
               {messages.map((message) => (
                 <li key={message._id}>
-                  <p>From:  {message.fromUser}</p>
+                  <p>From: {message.fromUser}</p>
                   <p>Content: {message.content}</p>
                 </li>
               ))}
