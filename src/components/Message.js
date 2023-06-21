@@ -6,9 +6,13 @@ const Message = ({ postId, authorId }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const messageRef = useRef("");
-  const { token } = useContext(AuthContext);
+  const { token, isLoggedIn } = useContext(AuthContext);
 
   const postMessage = async () => {
+    if (!isLoggedIn) {
+      console.log("User not logged in. Unable to post message.");
+      return;
+    }
     try {
       console.log("Sending message...");
       const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
@@ -96,7 +100,7 @@ const Message = ({ postId, authorId }) => {
       )}
       <form>
         <input type="text" placeholder="Message" ref={messageRef} />
-        <button type="button" onClick={postMessage}>
+        <button type="button" onClick={postMessage} disabled={!isLoggedIn}>
           Post Message
         </button>
       </form>

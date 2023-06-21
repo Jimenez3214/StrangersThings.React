@@ -18,12 +18,13 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [postId, setPostId] = useState(null);
   const [username, setUsername] = useState("");
+  const isLoggedIn = !!token; // Check if the token exists to determine the login status
 
   const login = (newToken, newUsername) => {
     setToken(newToken);
     localStorage.setItem("token", newToken);
     setUsername(newUsername);
-    setAuthPostId(newToken); // Set the postId as the same value as the newToken
+    setAuthPostId(newToken);
   };
 
   const logout = () => {
@@ -37,16 +38,15 @@ export const AuthProvider = ({ children }) => {
     setPostId(newPostId);
   };
 
-  // console.log('AuthToken:', token);
-
   return (
     <AuthContext.Provider
-      value={{ token, login, logout, postId, setAuthPostId, username }}
+      value={{ token, login, logout, postId, setAuthPostId, username, isLoggedIn }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 const Navbar = () => {
   const { token } = useContext(AuthContext);
@@ -58,9 +58,7 @@ const Navbar = () => {
       </Link>
       {token ? (
         <>
-          <Link className="nav-link" to="/Posts">
-            New Listings
-          </Link>
+          
           <Link className="nav-link" to="/mylistings">
             My Listings
           </Link>
@@ -79,6 +77,9 @@ const Navbar = () => {
         </>
       ) : (
         <>
+          <Link className="nav-link" to="/Posts">
+            New Listings
+          </Link>
           <Link className="nav-link" to="/register">
             Register
           </Link>
@@ -131,6 +132,7 @@ const Home = () => {
   };
 
   return (
+    
     <div style={divStyle}>
       <div className="st">
         <div className="st-top">
