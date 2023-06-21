@@ -58,7 +58,9 @@ const Navbar = () => {
       </Link>
       {token ? (
         <>
-          
+          <Link className="nav-link" to="/Posts">
+            New Listings
+          </Link>
           <Link className="nav-link" to="/mylistings">
             My Listings
           </Link>
