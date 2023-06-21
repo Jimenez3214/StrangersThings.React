@@ -6,7 +6,7 @@ const Message = ({ postId, authorId }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const messageRef = useRef("");
-  const { token, username } = useContext(AuthContext);
+  const { token, isLoggedIn } = useContext(AuthContext);
 
 
   useEffect(() => {
@@ -24,6 +24,10 @@ const Message = ({ postId, authorId }) => {
   }, [messages]);
 
   const postMessage = async () => {
+    if (!isLoggedIn) {
+      console.log("User not logged in. Unable to post message.");
+      return;
+    }
     try {
       console.log("Sending message...");
       const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
@@ -42,11 +46,15 @@ const Message = ({ postId, authorId }) => {
       const data = await response.json();
       console.log("Response:", data);
       if (data && data.success) {
-        const newMessage = data.data.message; 
-        setMessages((prevMessages) => [...prevMessages, newMessage]); 
-        messageRef.current.value = "";
+        // Message posted successfully
+        const newMessage = data.data.message; // Get the newly posted message
+        setMessages((prevMessages) => [...prevMessages, newMessage]); // Add the new message to the state
+        messageRef.current.value = ""; // Clear the message input field
       } else {
-        console.log("Error occurred while posting a message:", data && data.error);
+        console.log(
+          "Error occurred while posting a message:",
+          data && data.error
+        );
       }
       setIsLoading(false);
     } catch (error) {
@@ -54,7 +62,34 @@ const Message = ({ postId, authorId }) => {
     }
   };
 
-  
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/posts/${postId}/messages`);
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        // Fetch user information for each message
+        const messagesWithUsernames = await Promise.all(
+          data.map(async (message) => {
+            const userResponse = await fetch(`${BASE_URL}/users/${message.fromUser}`);
+            const userData = await userResponse.json();
+            const username = userData.username;
+            return { ...message, fromUser: username };
+          })
+        );
+        setMessages(messagesWithUsernames);
+      } else {
+        console.log("Received data is not an array:", data);
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages(); // Fetch messages when the component mounts
+  }, []);
+
   return (
     <div>
       {isLoading ? (
@@ -68,7 +103,7 @@ const Message = ({ postId, authorId }) => {
               {messages.map((message) => (
                 <li key={message._id}>
                   <p>From:  {message.fromUser}</p>
-                  <p>Message: {message.content}</p>
+                  <p>Content: {message.content}</p>
                 </li>
               ))}
             </ul>
@@ -76,9 +111,9 @@ const Message = ({ postId, authorId }) => {
         </div>
       )}
       <form>
-        <input type="text" className="input-group" placeholder="Message" ref={messageRef} />
-        <button type="button" className="btn btn-primary" onClick={postMessage}>
-          Send Message
+        <input type="text" placeholder="Message" ref={messageRef} />
+        <button type="button" onClick={postMessage}>
+          Post Message
         </button>
       </form>
     </div>

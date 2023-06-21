@@ -74,6 +74,7 @@ const CreateListing = () => {
   return (
     <div>
       <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>Create Listing</h1>
+      <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
@@ -142,6 +143,7 @@ const CreateListing = () => {
         </button>
       </form>
       {error && <p>{error}</p>}
+      </div>
     </div>
   );
 };
