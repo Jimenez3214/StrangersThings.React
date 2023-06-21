@@ -5,9 +5,10 @@ import Message from "./Message";
 const PostList = () => {
   const [posts, setPost] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedPostId, setSelectedPostId] = useState(null);
-
+ 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchPosts = async () => {
       try {
         const response = await fetch(`${BASE_URL}/posts`);
@@ -20,11 +21,20 @@ const PostList = () => {
       }
     };
     fetchPosts();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
     <div id="PostList">
-      <h1 className='display-4 font-weight-bold text-danger' style={{ fontFamily: 'Benguiat Bold' }}>New Listings</h1>
+      <h1
+        className="display-4 font-weight-bold text-danger"
+        style={{ fontFamily: "Benguiat Bold" }}
+      >
+        New Listings
+      </h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : posts && posts.length > 0 ? (
