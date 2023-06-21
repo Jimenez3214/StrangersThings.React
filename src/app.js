@@ -77,9 +77,7 @@ const Navbar = () => {
           <Link className="nav-link" to="/Profile">
             User Profile
           </Link>
-          <Link className="nav-link" to="/Message">
-            Message
-          </Link>
+
         </>
       ) : (
         <>
