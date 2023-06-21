@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../api";
+import Message from "./Message";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -74,6 +75,7 @@ const Search = () => {
                   <strong>Will Deliver:</strong>{" "}
                   {result.willDeliver ? "Yes" : "No"}
                 </p>
+                <Message postId={result._id}  authorId={result.author.username}/>
               </li>
             ))}
           </ul>

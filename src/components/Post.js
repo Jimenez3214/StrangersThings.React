@@ -32,7 +32,7 @@ const PostList = () => {
           {posts.map((post) => (
             <div className="card mb-3" key={post._id}>
               <div className="card-body">
-                <h2 className="card-title">Title: {post.title}</h2>
+                <h2 className="card-title">{post.title}</h2>
                 <p className="card-text">User: {post.author.username}</p>
                 <p className="card-text">Description: {post.description}</p>
                 <p className="card-text">Price: {post.price}</p>
@@ -40,7 +40,7 @@ const PostList = () => {
                 <p className="card-text">
                   Will Deliver: {post.willDeliver ? "Yes" : "No"}
                 </p>
-                <Message postId={post._id} authorId={post.author._id} />
+                <Message postId={post._id}  authorId={post.author._id}/>
               </div>
             </div>
           ))}
@@ -48,31 +48,6 @@ const PostList = () => {
       ) : (
         <p>No posts found.</p>
       )}
-    {/*   {selectedPostId && (
-        <form onSubmit={handleSubmitMessage} className="mt-4">
-          <h2 className="mb-3">Compose Message</h2>
-          <div className="form-group">
-            <label htmlFor="recipient">Recipient:</label>
-            <input
-              type="text"
-              id="recipient"
-              className="form-control"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="messageContent">Message:</label>
-            <textarea
-              id="messageContent"
-              className="form-control"
-              value={messageContent}
-              onChange={(e) => setMessageContent(e.target.value)}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">Send</button>
-        </form>
-      )} */}
     </div>
   );
 };

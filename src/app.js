@@ -9,6 +9,7 @@ import RegistrationPage from "./components/Register";
 import CreateListing from "./components/CreateListing";
 import MyListings from "./components/MyListings";
 
+
 export const COHORT_NAME = '2303-ftb-et-web-pt';
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
@@ -57,12 +58,12 @@ const Navbar = () => {
       <Link className="navbar-brand" to="/">StrangersThings</Link>
       {token ? (
         <>
-          <Link className='nav-link' to="/Posts">New Listings</Link>
+          <Link className='nav-link' to="/Posts">Listings</Link>
           <Link className='nav-link' to="/mylistings">My Listings</Link>
           <Link className='nav-link' to="/create">Create Listing</Link>          
           <Link className='nav-link' to="/login">Logout</Link>          
           <Link className='nav-link' to="/search">Search</Link>  
-          <Link className='nav-link' to="/Message">Message</Link>  
+          <Link className='nav-link' to="/Message">Messages</Link>  
         </>
       ) : (
         <>
