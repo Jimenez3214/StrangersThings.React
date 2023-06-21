@@ -123,3 +123,5 @@ THURSDAY 6 - 15 - 2023
 
 WEDNESDAY 06-21-23
     Project is complete and meets all the necessary requirements. Somethings I'm working on last minute are UI, the ability to have the users recieved messages be catagorized under the item the message was sent to, and cleaning the code up a bit. There's always more you can do, to make it better. 
+
+    testing fix
