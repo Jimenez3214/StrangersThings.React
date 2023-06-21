@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setToken(null);
     localStorage.removeItem("token");
-    setPostId(null); 
+    setPostId(null);
     setUsername("");
   };
 
@@ -132,50 +132,37 @@ const Home = () => {
 
   return (
     <div style={divStyle}>
-      <div className="text-center" style={textStyle}>
-        <h1
-          className="display-4 font-weight-bold text-danger"
-          style={{ fontFamily: "Benguiat Bold" }}
-        >
-          S T R A N G E R S T H I N G S
-        </h1>
-
-        <div className="st">
-          <div className="st-top">
-            <div className="st-bound st-bound-full"></div>
-            <p>
-              <span className="st-drop st-stranger-s">S</span>
-              <span className="st-stranger-t">t</span>
-              <span className="st-stranger-r">r</span>
-              <span className="st-stranger-a">a</span>
-              <span className="st-stranger-n">n</span>
-              <span className="st-stranger-g">g</span>
-              <span className="st-stranger-e">e</span>
-              <span className="st-stranger-r">r</span>
-              <span className="st-drop st-stranger-s-2">S</span>
-            </p>
-            <div className="st-bound st-bound-mini st-bound-left"></div>
-            <div className="st-bound st-bound-mini st-bound-right"></div>
-          </div>
-          <div className="st-bottom">
-            <p>
-              <span className="st-things-t">T</span>
-              <span className="st-things-h">h</span>
-              <span className="st-things-i">i</span>
-              <span className="st-things-n">n</span>
-              <span className="st-things-g">g</span>
-              <span className="st-things-s">s</span>
-            </p>
-          </div>
+      <div className="st">
+        <div className="st-top">
+          <div className="st-bound st-bound-full"></div>
+          <p>
+            <span className="st-drop st-stranger-s">S</span>
+            <span className="st-stranger-t">t</span>
+            <span className="st-stranger-r">r</span>
+            <span className="st-stranger-a">a</span>
+            <span className="st-stranger-n">n</span>
+            <span className="st-stranger-g">g</span>
+            <span className="st-stranger-e">e</span>
+            <span className="st-stranger-r">r</span>
+            <span className="st-drop st-stranger-s-2">S</span>
+          </p>
+          <div className="st-bound st-bound-mini st-bound-left"></div>
+          <div className="st-bound st-bound-mini st-bound-right"></div>
+        </div>
+        <div className="st-bottom">
+          <p>
+            <span className="st-things-t">T</span>
+            <span className="st-things-h">h</span>
+            <span className="st-things-i">i</span>
+            <span className="st-things-n">n</span>
+            <span className="st-things-g">g</span>
+            <span className="st-things-s">s</span>
+          </p>
         </div>
       </div>
     </div>
   );
 };
-
-/* const Logout = () => {
-  return <h1>Logout</h1>;
-}; */
 
 ReactDOM.render(<App />, document.getElementById("app"));
 
