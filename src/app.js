@@ -8,6 +8,7 @@ import Message from "./components/Message";
 import RegistrationPage from "./components/Register";
 import CreateListing from "./components/CreateListing";
 import MyListings from "./components/MyListings";
+import UserProfile from "./components/Profile";
 
 export const COHORT_NAME = "2303-ftb-et-web-pt";
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
@@ -73,6 +74,9 @@ const Navbar = () => {
           <Link className="nav-link" to="/search">
             Search
           </Link>
+          <Link className="nav-link" to="/Profile">
+            User Profile
+          </Link>
           <Link className="nav-link" to="/Message">
             Message
           </Link>
@@ -114,6 +118,7 @@ const App = () => {
           <Route path="/create" element={<CreateListing />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Profile" element={<UserProfile />} />
           <Route path="/Message" element={<Message />} />
         </Routes>
 
