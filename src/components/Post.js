@@ -48,31 +48,7 @@ const PostList = () => {
       ) : (
         <p>No posts found.</p>
       )}
-    {/*   {selectedPostId && (
-        <form onSubmit={handleSubmitMessage} className="mt-4">
-          <h2 className="mb-3">Compose Message</h2>
-          <div className="form-group">
-            <label htmlFor="recipient">Recipient:</label>
-            <input
-              type="text"
-              id="recipient"
-              className="form-control"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="messageContent">Message:</label>
-            <textarea
-              id="messageContent"
-              className="form-control"
-              value={messageContent}
-              onChange={(e) => setMessageContent(e.target.value)}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">Send</button>
-        </form>
-      )} */}
+
     </div>
   );
 };
